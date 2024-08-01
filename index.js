@@ -3,12 +3,14 @@ import { config } from './config.js';
 import Database from './database.js';
 
 // Import App routes
-import person from './person.js';
+import user from './user.js';
 import openapi from './openapi.js';
+import cors from 'cors'
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 const app = express();
+app.use(cors());
 
 // Development only - don't do in production
 // Run this to create the table in the database
@@ -16,7 +18,13 @@ if (process.env.NODE_ENV === 'development') {
   const database = new Database(config);
   database
     .executeQuery(
-      `CREATE TABLE Person (id int NOT NULL IDENTITY, firstName varchar(255), lastName varchar(255));`
+      `CREATE TABLE Users (
+        id int NOT NULL IDENTITY PRIMARY KEY,
+        email varchar(255) NOT NULL UNIQUE,
+        password varchar(255) NOT NULL,
+        name varchar(255),
+        company varchar(255)
+      );`
     )
     .then(() => {
       console.log('Table created');
@@ -29,7 +37,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // Connect App routes
 app.use('/api-docs', openapi);
-app.use('/persons', person);
+app.use('/users', user);
 app.use('*', (_, res) => {
   res.redirect('/api-docs');
 });
