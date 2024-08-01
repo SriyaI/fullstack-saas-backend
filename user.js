@@ -50,7 +50,7 @@ router.post('/login', async (req, res) => {
 router.get('/profile', async (req, res) => {
     try {
       const authHeader = req.headers.authorization;
-      
+      console.log(authHeader,"authheader")
       if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(401).json({ error: 'Invalid or missing authorization header' });
       }
