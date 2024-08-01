@@ -32,7 +32,7 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await database.readUserByEmail(email);
-
+    console.log(user,"user")
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
@@ -40,7 +40,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
       expiresIn: '1h'
     });
-
+    console.log(token, "token")
     res.status(200).json({ token });
   } catch (err) {
     res.status(500).json({ error: err.message });
