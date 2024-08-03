@@ -45,18 +45,26 @@ export default class Database {
   async createUser(data) {
     await this.connect();
     const request = this.poolconnection.request();
-
+  
     request.input('email', sql.NVarChar(255), data.email);
     request.input('password', sql.NVarChar(255), data.password);
     request.input('name', sql.NVarChar(255), data.name);
     request.input('company', sql.NVarChar(255), data.company);
-
-    const result = await request.query(
+  
+    // Insert user into the database
+    await request.query(
       `INSERT INTO Users (email, password, name, company) VALUES (@email, @password, @name, @company)`
     );
-
-    return result.rowsAffected[0];
+  
+    // Retrieve the user ID of the newly created user
+    const result = await request.query(
+      `SELECT id, email, name, company FROM Users WHERE email = @email`
+    );
+  
+    // Return the user details
+    return result.recordset[0];
   }
+  
 
   async readAllUsers() {
     await this.connect();
