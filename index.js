@@ -7,7 +7,7 @@ import user from './user.js';
 import openapi from './openapi.js';
 import cors from 'cors';
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 8080;
 
 const app = express();
 app.use(cors());
@@ -17,6 +17,7 @@ app.use(express.json()); // JSON parsing middleware
 // Run this to create the table in the database
 if (process.env.NODE_ENV === 'development') {
   const database = new Database(config);
+  console.log('Private Key:', process.env.FIREBASE_PRIVATE_KEY);
   database
     .executeQuery(
       `CREATE TABLE Users (
