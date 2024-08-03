@@ -4,18 +4,22 @@ import jwt from 'jsonwebtoken';
 import { config } from './config.js';
 import Database from './database.js';
 import admin from 'firebase-admin';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const serviceAccount={
     "type": "service_account",
-    "project_id": "assignment-4c669",
-    "private_key_id": "412002d2c51a78f2c6d19c829c8d549e04004cc4",
-    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDW/enGSwaMCtFQ\nc/FneiiP4/lvRFH00DLnIPUWYwZxLk3X5old8qJEaIIRWuAxddEgy9C0dCGMN0nv\nDti9XhoS3zJ/T0naClnIzud4bp0VLussNfqOe8hQQCzMDs5eKSy+QCjpi4JNz0Yf\nPOMs0rMNq3KXpfCLNUj2eWrpR8Ox15DQWYC0Klmbk7/pnFHeN/IAznipHVMaRrAd\nSYmhtyl4EIdU8djdg9spoGn1TFJ417xkHr7w+VjJhlXDAeF72atwBBhkiEGOhmWN\n/EH2TOKkmxtWYiIyrmqvgWJPzbL7YXQ+rKG0t1VBYy+m1o2jAKqO6v3KvjXrIEn0\nhjwcNXHfAgMBAAECggEAEfFH+N4bEkX22RWMEJw/1V5r207i3iEgFm0IN1GVYI3C\nPmIFldshkr78F/GzIz2XcfrAlMbaY+bbW0GscgVv/KI3Byv5WGKjwqAN7l2g63sq\nclqg6hJHkfcBJhiYPYCHNOuK3o7flZnWWtYMiZmeCuaDnkdhj2SnjbZtZ0GvgeB6\nExbMrYJgCd0vpTmY4pZ4cX2IM/4UVkcRWBn5nagABvxAons53oUrzoty3RqdH3C3\nahfQQUhcnZn636Z3iwuOsu/CG2JLC2IORQ9fKg5kBcqE2wiFqngTgiF0NRfq455y\nF3eomDnVCBhS62p4N4+ofCUw/POZPQ+QAzwXfy7yJQKBgQDsXFWL3GOoCwh8nme8\nzYjptckQsbEfx9CcZONHZDkzWQNYsyEGGwL9H9abnjZl15P26WxgU9VveYuJlHqp\nfFRStHzzrpe1jx8EgeFUXlKdXkey3gTR30uqjMyJYwgtHcTk2RsPeTYA3EVW33xQ\ne5banMasJCNvQN8TPWYS6O4AywKBgQDo2woHUP+nL6WpE08RmsnlosIdZ6vXAYQ0\n2a+vhhTILs/KsUSUPXtOPj6otNxL+B5zglyzO5faJjmibPM8U7focpWUqWCN+ogK\ntcRIEjTR6k4ium98+mXpMoFAnoH77fpG/lQXBg6rMsLbb3U3O0+xZDKKmxYlKCtm\nL2Le4m0UvQKBgQDpr0SY+fXBn97tLsQLw/44axV2nugrLqgO6CRZYjq3jKslWD0v\nRyeGUaMhyqOnvyM4fII9HsWn6DjQdm9sAFNyTaY4Wwb9Z5pYH31Dp9nwYtVqf92u\nDiJGZdyXfMUJriQLyqbZfpKo+R7JDD5haD+2tkgqy7QI+89Ru2OfEJK3TwKBgQCC\nGvENiXpu5baAM+O4CG7KuhgP6f8f0R8XkJITVq2B9HXx4P5afcfJvgmwpe15HReW\nnr5A/wknwLfvQ0Tc7kIRxQRC3iiu687bfRhA1LtilrI1wUnN4PLUS33gpzAlnaB7\nzlsZyi6kBWbOyQYLaD5s9Xkv7NuAw2MMY2mw837TWQKBgQDVW4CCaFGUuCy29OwM\n9UAzkYXEdzyDTU/KDW0vFt1mKq/TpZCtNlTq2hSFOyoToUe2hWPzHr5DjUpKmOmX\n2qT1T7a7bj0xKgIHVe2MLdSA8+0ctLdzzDeGFxqkDmHH6K5beQamJCL0R4rldlhf\nLYe/j0dGYanhkNiXrJ+KxZgAmA==\n-----END PRIVATE KEY-----\n",
-    "client_email": "firebase-adminsdk-wpvf6@assignment-4c669.iam.gserviceaccount.com",
-    "client_id": "106169587741702481557",
-    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-    "token_uri": "https://oauth2.googleapis.com/token",
-    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-wpvf6%40assignment-4c669.iam.gserviceaccount.com",
-    "universe_domain": "googleapis.com"
+    "project_id": process.env.FIREBASE_PROJECT_ID,
+    "private_key_id": process.env.FIREBASE_PRIVATE_KEY_ID,
+    "private_key": process.env.FIREBASE_PRIVATE_KEY,
+    "client_email": process.env.FIREBASE_CLIENT_EMAIL,
+    "client_id": process.env.FIREBASE_CLIENT_ID,
+    "auth_uri": process.env.FIREBASE_AUTH_URI,
+    "token_uri": process.env.FIREBASE_TOKEN_URI,
+    "auth_provider_x509_cert_url": process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
+    "client_x509_cert_url": process.env.FIREBASE_CLIENT_X509_CERT_URL,
+    "universe_domain": process.env.FIREBASE_UNIVERSE_DOMAIN
   }
   
 
