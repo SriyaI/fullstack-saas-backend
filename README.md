@@ -19,6 +19,29 @@ This repository contains a Secure SaaS application with login functionality, dev
 
 This project is a secure SaaS application that allows users to register, log in, and view their profile. It uses JWT for authentication and integrates Google Sign-In via Firebase. The backend is built with Node.js, and the frontend is developed using React. Cypress is used for end-to-end UI testing.
 
+Landing page/Login Page
+
+<img src="https://github.com/user-attachments/assets/0c2d59c9-411f-4820-907e-0d84fe719611" alt="Description" style="width: 300px; height: auto;">
+
+Click Register in the page for New user
+
+<img src="https://github.com/user-attachments/assets/3e7d8101-636a-4900-bec9-c9bbbb00d77e" alt="Description" style="width: 300px; height: auto;">
+
+After Register is submitted, it will take you back to Login screen. Give the Login credentials which are created and click Login. You will see the profile screen as below.
+
+<img src="https://github.com/user-attachments/assets/99b5f4fd-9925-42e1-b189-498f5693593f" alt="Description" style="width: 300px; height: auto;">
+
+For Sign in with google account, go to Login page/Landing page
+
+<img src="https://github.com/user-attachments/assets/0c2d59c9-411f-4820-907e-0d84fe719611" alt="Description" style="width: 300px; height: auto;">
+
+After Sign in with Google, Profile of the user is displayed.
+
+<img src="https://github.com/user-attachments/assets/207de0d7-80e4-4d67-9028-6b9e7cbf0f8b" alt="Description" style="width: 300px; height: auto;">
+
+
+
+
 ## Folder Structure
 
 ### Backend
